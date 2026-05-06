@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/mvc
+           http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!-- 只扫描 Controller -->
+    <context:component-scan base-package="com.example.ssm.controller"/>
+
+    <!-- 启用 MVC 注解驱动 -->
+    <mvc:annotation-driven/>
+
+    <!-- ★ 静态资源映射：让前端打包文件可被访问 -->
+    <mvc:resources mapping="/static/**" location="/static/"/>
+
+    <!-- ★ 默认 Servlet 处理：兜底处理非 API 的静态请求 -->
+    <mvc:default-servlet-handler/>
+
+    <!-- CORS 跨域全局配置 -->
+    <mvc:cors>
+        <mvc:mapping path="/**"
+                     allowed-origins="*"
+                     allowed-methods="GET,POST,PUT,DELETE,OPTIONS"
+                     allowed-headers="*"/>
+    </mvc:cors>
+
+</beans>
